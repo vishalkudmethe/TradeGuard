@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
+  -->
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="TradeGuard Pro: The ultimate PDT protection utility for retail traders. Track day-trade strikes, monitor rolling windows, and prevent account freezes with real-time US market logic.">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="TradeGuard Pro">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>TradeGuard Pro | Ultimate PDT Protection</title>
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <style>
+    :root {
+      --bg-color: #0a0a0a;
+      --text-color: #ffffff;
+      --accent-color: #00ff00;
+      --secondary-text: #94a3b8;
+      --glass-bg: rgba(255, 255, 255, 0.03);
+      --glass-border: rgba(255, 255, 255, 0.1);
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Alert Banner */
+    .news-banner {
+      background: linear-gradient(90deg, #064e3b, #065f46);
+      color: #ecfdf5;
+      text-align: center;
+      padding: 12px 20px;
+      font-size: 14px;
+      font-weight: 500;
+      position: sticky;
+      top: 0;
+      z-index: 10001;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .news-banner a {
+      color: #fff;
+      text-decoration: underline;
+      font-weight: 700;
+    }
+
+    /* Hero Section */
+    #landing-page-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 99999;
+      background-color: var(--bg-color);
+      overflow-y: auto;
+      transition: opacity 0.8s ease-out, visibility 0.8s;
+    }
+
+    #landing-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 80px 20px;
+      text-align: center;
+      background: radial-gradient(circle at 50% 30%, #1e293b 0%, #0a0a0a 70%);
+    }
+
+    .hero-container {
+      max-width: 900px;
+      z-index: 2;
+    }
+
+    .brand-title {
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      font-weight: 900;
+      letter-spacing: -1px;
+      margin-bottom: 10px;
+      background: linear-gradient(180deg, #00ff00 0%, #008800 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-transform: uppercase;
+      filter: drop-shadow(0 0 15px rgba(0, 255, 0, 0.3));
+    }
+
+    .tagline {
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      color: var(--accent-color);
+      margin-bottom: 40px;
+      font-weight: 300;
+      letter-spacing: 2px;
+    }
+
+    .launch-btn {
+      background: var(--accent-color);
+      color: #000;
+      padding: 18px 40px;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: inline-block;
+      box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+      border: none;
+      cursor: pointer;
+    }
+
+    .launch-btn:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 0 30px rgba(0, 255, 0, 0.4);
+    }
+
+    /* Purpose Section */
+    .purpose-section {
+      margin-top: 100px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    .card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(10px);
+      padding: 40px;
+      border-radius: 24px;
+      text-align: left;
+      transition: border-color 0.3s;
+    }
+
+    .card:hover {
+      border-color: var(--accent-color);
+    }
+
+    .card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: var(--accent-color);
+    }
+
+    .card p {
+      color: var(--secondary-text);
+      line-height: 1.6;
+    }
+
+    /* Footer */
+    .footer-links {
+      margin-top: 80px;
+      padding-bottom: 40px;
+      opacity: 0.6;
+      font-size: 14px;
+    }
+
+    .footer-links a {
+      color: #fff;
+      margin: 0 15px;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+
+    /* Loading state */
+    .loading-spinner {
+      display: none;
+      width: 24px;
+      height: 24px;
+      border: 3px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 1s ease-in-out infinite;
+      margin-left: 10px;
+      vertical-align: middle;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;900&display=swap" rel="stylesheet">
+
+  <div id="landing-page-wrapper">
+    <div class="news-banner">
+      ⚡ <b>PDT PROTECTION:</b> Real-time strike tracking and automated account enforcement for retail traders.
+    </div>
+
+    <div id="landing-page">
+      <div class="hero-container">
+        <h1 class="brand-title">TradeGuard Pro</h1>
+        <p class="tagline">Ultimate Protection for the Modern Trader</p>
+        
+        <button id="launch-button" class="launch-btn" onclick="launchApp()">
+          LAUNCH DASHBOARD <div class="loading-spinner" id="btn-spinner"></div>
+        </button>
+
+        <div class="purpose-section">
+          <div class="card">
+            <h3>The PDT Problem</h3>
+            <p>The SEC restrictions (3 day-trades in 5 business days) are a trap for retail traders. One accidental trade can freeze your account for 90 days.</p>
+          </div>
+          <div class="card">
+            <h3>The Solution</h3>
+            <p>TradeGuard Pro serves as a functional kill-switch. We track your strikes in real-time and provide a hard lockdown when limits are reached.</p>
+          </div>
+          <div class="card">
+            <h3>Intelligent Logic</h3>
+            <p>Our engine handles T+1 settlements, US Market Holidays, and rolling 5-day windows automatically. No more manual counting.</p>
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Service</a>
+          <a href="refund.html">Refund Policy</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function launchApp() {
+      var btn = document.getElementById('launch-button');
+      var spinner = document.getElementById('btn-spinner');
+      
+      spinner.style.display = 'inline-block';
+      btn.disabled = true;
+      btn.innerText = 'INITIALIZING...';
+      
+      // Complete removal of the landing layer to reveal Flutter
+      setTimeout(function() {
+        var wrapper = document.getElementById('landing-page-wrapper');
+        wrapper.style.opacity = '0';
+        wrapper.style.visibility = 'hidden';
+        
+        setTimeout(function() {
+          wrapper.remove();
+        }, 800);
+      }, 1000);
+    }
+  </script>
+t>
+  <!--
+    You can customize the "flutter_bootstrap.js" script.
+    This is useful to provide a custom configuration to the Flutter loader
+    or to give the user feedback during the initialization process.
+
+    For more details:
+    * https://docs.flutter.dev/platform-integration/web/initialization
+  -->
+  <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+  <script type="text/javascript">
+    // Set to sandbox for testing
+    Paddle.Environment.set('sandbox');
+    Paddle.Initialize({ 
+      token: 'test_32cd8034740bd7a5cda56579c3e' 
+    });
+
+    function openPaddleCheckout(priceId) {
+      console.log("Opening Paddle Checkout for Price ID:", priceId);
+      Paddle.Checkout.open({
+        settings: {
+          displayMode: "overlay",
+          theme: "dark",
+          locale: "en"
+        },
+        items: [
+          {
+            priceId: priceId,
+            quantity: 1
+          }
+        ],
+        eventCallback: function(data) {
+          console.log("Paddle Event:", data);
+        }
+      });
+    }
+  </script>
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>
